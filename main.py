@@ -167,8 +167,4 @@ def process_csv_to_pdf(file_location: str, pdf_directory: str, year: str):
             print(f"WhatsApp message sent to {row['Name']} at {phone_number}.")
 
 
-if __name__ == "__main__":
-    if not os.path.exists("uploads"):
-        os.makedirs("uploads")
-    import uvicorn
-    uvicorn.run(app, host="localhost", port=9000)
+
