@@ -65,6 +65,7 @@ def send_whatsapp_message(phone_number, image_paths, student_name):
 
         try:
             print(f"Sending image to {phone_number}.")
+            # Removed dependency on mouse control and used sendwhats_image
             pwk.sendwhats_image(phone_number, image_path, caption=message)
             print(f"WhatsApp message sent to {phone_number} with image {image_path}.")
         except Exception as e:
@@ -165,5 +166,3 @@ def process_csv_to_pdf(file_location: str, pdf_directory: str, year: str):
             send_whatsapp_message(phone_number, image_paths, row['Name'])
 
             print(f"WhatsApp message sent to {row['Name']} at {phone_number}.")
-
-
