@@ -167,4 +167,3 @@ def process_csv_to_pdf(file_location: str, pdf_directory: str, year: str):
             print(f"WhatsApp message sent to {row['Name']} at {phone_number}.")
 
 
-
