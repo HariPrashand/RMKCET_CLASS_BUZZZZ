@@ -39,7 +39,7 @@ async def upload_file(request: Request, file: UploadFile, background_tasks: Back
 
 class PDF(FPDF):
     def header(self):
-        self.image('C:/Users/chowd/Pictures/Screenshots/123412.png', 10, 8, 190)
+        self.image('123412.png', 10, 8, 190)
         self.ln(30)
 
     def footer(self):
