@@ -1,0 +1,16 @@
+services:
+  - name: RMKCET-Class-Buzzzz
+    type: web
+    env: python
+    buildCommand: |
+      pip install -r requirements.txt
+    startCommand: |
+      python manage.py migrate && python manage.py runserver 0.0.0.0:$PORT
+    envVars:
+      - key: PORT
+        value: 10000  # Render sets this automatically, but you can override if needed
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_ALLOWED_HOSTS
+        value: "0.0.0.0,localhost"
+    autoDeploy: true
