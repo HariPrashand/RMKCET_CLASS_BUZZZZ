@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Upload Excel File</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Preloader Styles */
+        .preloader {
+            text-align: center;
+            color: #ff4d4d;
+        }
+
+        .preloader .rmkcet {
+            font-size: 60px;
+            color: lightblue;
+            font-weight: bold;
+            text-shadow: 0 0 20px lightblue, 0 0 30px lightblue;
+            margin-bottom: 10px;
+        }
+
+        .preloader h1 {
+            font-size: 50px;
+            font-weight: bold;
+            text-shadow: 0 0 20px #ff4d4d, 0 0 30px #ff4d4d;
+            margin: 0;
+        }
+
+        .preloader p {
+            font-size: 18px;
+            letter-spacing: 3px;
+            margin-top: 10px;
+            color: #ff4d4d;
+            text-shadow: 0 0 10px #ff4d4d;
+        }
+
+        .line {
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(to right, transparent, #ff4d4d);
+            margin: 20px auto 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 100%;
+            background-color: #ff4d4d;
+            animation: loading 2s infinite;
+        }
+
+        @keyframes loading {
+            from {
+                left: -40px;
+            }
+            to {
+                left: 200px;
+            }
+        }
+
+        /* Login & Upload Form Styles */
+        #login-container,
+        #upload-container {
+            display: none;
+        }
+
+        body.main {
+            background-color: #e0f7fa;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px 3px #00796b; /* Same glow effect as the inputs */
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #00796b;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #00796b;
+            font-weight: bold;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="file"],
+        select {
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #f5f5f5;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="file"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #00796b;
+            box-shadow: 0 0 10px #00796b;
+        }
+
+        button {
+            background-color: #00796b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #004d40;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Preloader Section -->
+    <div class="preloader" id="preloader">
+        <div class="rmkcet">RMKCET</div>
+        <h1>CLASS BUZZ</h1>
+        <p>INITIALIZING</p>
+        <div class="line"></div>
+    </div>
+
+    <!-- Login Section -->
+    <div id="login-container" class="container">
+        <h2>RMK College of Engineering and Technology</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Upload Section -->
+    <div id="upload-container" class="container">
+        <h2>Upload Student Data</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="year">Select Year:</label>
+                <select id="year" name="year" required>
+                    <option value="">Select Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="file">Choose Excel File:</label>
+                <input type="file" id="file" name="file" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        // Preloader Timer
+        setTimeout(() => {
+            document.body.classList.add('main');
+            document.getElementById('preloader').style.display = 'none';
+            document.getElementById('login-container').style.display = 'block';
+        }, 5000);
+
+        // Handle Login Form Submission
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if ((email === 'bharad008@rmkcet.ac.in' || email === 'abc@gmail.com') && password === '123') {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('upload-container').style.display = 'block';
+            } else {
+                alert('Invalid email or password!');
+            }
+        });
+    </script>
+
+</body>
+</html>
